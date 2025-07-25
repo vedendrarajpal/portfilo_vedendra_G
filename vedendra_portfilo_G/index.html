@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedendra Raj Pal - DevOps & Cloud Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for Inter font and general body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e5e7eb; /* Changed to a slightly darker gray */
+            color: #333;
+            line-height: 1.6;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Styles for the Chatbox */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            max-width: 90vw; /* Responsive width */
+            height: 450px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            transform: translateY(100%); /* Start hidden below */
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .chat-container.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .chat-header {
+            background-color: #2563eb; /* Blue-600 */
+            color: white;
+            padding: 1rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #f9fafb; /* Light background for messages */
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .chat-input-area {
+            padding: 1rem;
+            background-color: #ffffff;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            border: 1px solid #d1d5db; /* Gray-300 */
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .chat-input-area input:focus {
+            border-color: #2563eb; /* Blue-600 */
+        }
+        .chat-message {
+            margin-bottom: 0.75rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-message.user {
+            align-items: flex-end;
+        }
+        .chat-message.bot {
+            align-items: flex-start;
+        }
+        .chat-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-message.user .chat-bubble {
+            background-color: #2563eb; /* Blue-600 */
+            color: white;
+            border-bottom-right-radius: 4px; /* Pointy corner */
+        }
+        .chat-message.bot .chat-bubble {
+            background-color: #e0e7ff; /* Blue-100 */
+            color: #333;
+            border-bottom-left-radius: 4px; /* Pointy corner */
+        }
+        .chat-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2563eb; /* Blue-600 */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 1001; /* Above chatbox */
+        }
+        .chat-toggle-button:hover {
+            background-color: #1d4ed8; /* Blue-700 */
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md py-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="#" class="text-2xl font-bold text-blue-600">Vedendra Raj Pal</a>
+            <nav>
+                <ul class="flex space-x-4 sm:space-x-6">
+                    <li><a href="#profile" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Profile</a></li>
+                    <li><a href="#skills" class="text-700 hover:text-blue-600 font-medium transition duration-300">Skills</a></li>
+                    <li><a href="#education" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Education</a></li>
+                    <li><a href="#experience" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Experience</a></li>
+                    <li><a href="#projects" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Projects</a></li>
+                    <li><a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Profile Section -->
+        <section id="profile" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Profile</h2>
+            <p class="text-lg leading-relaxed">Motivated and hands-on student pursuing a Bachelor of Technology in Computer Science and Engineering with practical experience in DevOps methodologies and Cloud Computing. Proficient in Linux administration, fundamental AWS services (S3, EC2, IAM), Docker, and building automated CI/CD pipelines using Jenkins. Seeking opportunities to apply and expand these skills in a professional environment.</p>
+            <div class="mt-6 flex flex-wrap gap-4 text-gray-600">
+                <span class="flex items-center"><i class="fas fa-phone mr-2 text-blue-500"></i> (+91) 9521809877</span>
+                <span class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-500"></i> vedendrarajpal17@gmail.com</span>
+                <a href="https://www.linkedin.com/in/vedendra-raj-pal-306929258/" target="_blank" class="flex items-center hover:text-blue-600 transition duration-300"><i class="fab fa-linkedin mr-2 text-blue-500"></i> LinkedIn</a>
+                <a href="https://github.com/vedendrarajpal" target="_blank" class="flex items-center hover:text-blue-600 transition duration-300"><i class="fab fa-github mr-2 text-blue-500"></i> GitHub</a>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-500"></i> Jaipur, Rajasthan</span>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">DevOps & Cloud</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>AWS (S3, EC2, IAM)</li>
+                        <li>Linux (User Permissions, Storage Management, LVM, SELinux)</li>
+                        <li>Docker</li>
+                        <li>Kubernetes (basic)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">CI/CD Tools</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Jenkins (basic)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Scripting & Programming</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Python</li>
+                        <li>C++</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Web Frameworks</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Flask</li>
+                        <li>Django (basic)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Databases</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>MySQL</li>
+                        <li>SQLite</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Servers & Networking</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Database Server</li>
+                        <li>NFS Server</li>
+                        <li>Web Server (HTTPD)</li>
+                        <li>REST APIs</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Web Development Concepts</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Web Hosting</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Education</h2>
+            <div class="mb-4">
+                <h3 class="text-xl font-semibold text-gray-700">Bachelor of Technology in Computer Science and Engineering</h3>
+                <p class="text-gray-600">Arya College of Engineering (ACE), Jaipur, Rajasthan</p>
+                <p class="text-sm text-gray-500">Expected Graduation: 2026</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">Class – 12th (CBSE)</h3>
+                <p class="text-gray-600">Air Force School, Jaipur, Rajasthan</p>
+                <p class="text-sm text-gray-500">Completed: 2022</p>
+            </div>
+        </section>
+
+        <!-- Training and Internship Section -->
+        <section id="experience" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Training and Internship</h2>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-700">DevOps and Cloud Computing Trainee</h3>
+                <p class="text-gray-600">GRRAS SOLUTION PVT. LMT.</p>
+                <p class="text-sm text-gray-500">October 2024 – June 2025</p>
+                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                    <li>Gained practical experience in configuring various servers including Database, NFS, and Webserver (HTTPD).</li>
+                    <li>Successfully launched a Static Website using AWS S3 Bucket.</li>
+                    <li>Developed foundational understanding of Linux administration and AWS services through hands-on exercises.</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">Python Programming Trainee</h3>
+                <p class="text-gray-600">GRRAS SOLUTION PVT. LMT.</p>
+                <p class="text-sm text-gray-500">March 2024 – August 2024</p>
+                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                    <li>Completed training in Python and Web Development using Flask.</li>
+                    <li>Developed a Bank Management Program and a dynamic Portfolio Website with MySQL integration.</li>
+                    <li>Gained hands-on experience in Networking concepts.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Projects</h2>
+            <div class="space-y-6">
+                <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
+                    <h3 class="text-xl font-semibold text-gray-700">CI/CD Pipeline using Jenkins, Git, and AWS EC2</h3>
+                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** Jenkins, GitHub, Webhook, AWS EC2, Linux, Apache</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                        <li>Automated code deployment from GitHub to AWS web server using Jenkins CI/CD pipeline.</li>
+                        <li>Configured Jenkins on one EC2 instance and deployed to another, ensuring continuous delivery via GitHub Webhooks and SSH.</li>
+                    </ul>
+                </div>
+                <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
+                    <h3 class="text-xl font-semibold text-gray-700">Personal Cloud Storage System</h3>
+                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** Python, Flask, AWS S3, EC2, IAM, Linux</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                        <li>Developed a secure, Dropbox-like system for storing and accessing files on the cloud.</li>
+                    </ul>
+                </div>
+                <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
+                    <h3 class="text-xl font-semibold text-gray-700">Two-Tier Application Deployment Using Docker</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                        <li>Successfully deployed a two-tier application, demonstrating practical application of Docker for containerization.</li>
+                    </ul>
+                </div>
+                <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
+                    <h3 class="text-xl font-semibold text-gray-700">Portfolio Website</h3>
+                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Flask</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                        <li>Developed and hosted a personal portfolio website showcasing technical skills and projects.</li>
+                    </ul>
+                </div>
+                <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
+                    <h3 class="text-xl font-semibold text-gray-700">Icecream Website</h3>
+                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Django, Django models (Database)</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                        <li>Created a dynamic website with database integration.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Achievements</h2>
+            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                <li>National Cadet Corps (NCC) A Certificate – Grade A</li>
+                <li>1st Prize – Robo War - Engineering Day, Arya College of Engineering</li>
+                <li>Bronze Badge – Python (HackerRank): Recognized for problem-solving skills and proficiency in Python programming.</li>
+                <li>Demonstrated proficiency in HTML and Linux through training from Spoken Tutorial (scored above 70%).</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Contact Me</h2>
+            <p class="text-gray-600 mb-6">Have a question or want to connect? Send me a message!</p>
+            <form id="contactForm" class="space-y-4" action="#" method="POST">
+                <div>
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                    <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                    <textarea id="message" name="message" rows="5" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"></textarea>
+                </div>
+                <button type="submit" id="submitButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105">
+                    Send Message
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <p>&copy; 2024 Vedendra Raj Pal. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="https://www.linkedin.com/in/vedendra-raj-pal-306929258/" target="_blank" class="text-white hover:text-blue-400 transition duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://github.com/vedendrarajpal" target="_blank" class="text-white hover:text-blue-400 transition duration-300"><i class="fab fa-github text-xl"></i></a>
+                <a href="mailto:vedendrarajpal17@gmail.com" class="text-white hover:text-blue-400 transition duration-300"><i class="fas fa-envelope text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbox Toggle Button -->
+    <div id="chatToggleButton" class="chat-toggle-button">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbox Container -->
+    <div id="chatContainer" class="chat-container">
+        <div class="chat-header">
+            Ask Me Anything!
+            <button id="closeChatButton" class="text-white hover:text-gray-200 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <!-- Chat messages will be appended here -->
+            <div class="chat-message bot">
+                <div class="chat-bubble">Hi there! I can answer basic questions about Vedendra's profile, skills, education, experience, and projects. Try asking "Tell me about your skills" or "What are your projects?".</div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask a question..." />
+            <button id="sendChatButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Store extracted portfolio content for the chatbox
+        let portfolioContent = {};
+
+        // Function to extract relevant text content from the page
+        function extractPortfolioContent() {
+            // Profile
+            portfolioContent.profile = document.getElementById('profile').querySelector('p').textContent.trim();
+
+            // Skills
+            portfolioContent.skills = {};
+            document.querySelectorAll('#skills > div').forEach(categoryDiv => {
+                const categoryTitle = categoryDiv.querySelector('h3').textContent.trim();
+                const items = Array.from(categoryDiv.querySelectorAll('li')).map(li => li.textContent.trim());
+                portfolioContent.skills[categoryTitle] = items.join(', ');
+            });
+
+            // Education
+            portfolioContent.education = [];
+            document.querySelectorAll('#education > div').forEach(eduDiv => {
+                const degree = eduDiv.querySelector('h3').textContent.trim();
+                const institution = eduDiv.querySelector('p:nth-of-type(1)').textContent.trim();
+                const year = eduDiv.querySelector('p:nth-of-type(2)').textContent.trim();
+                portfolioContent.education.push(`${degree} from ${institution} (${year})`);
+            });
+
+            // Experience (Training and Internship)
+            portfolioContent.experience = [];
+            document.querySelectorAll('#experience > div').forEach(expDiv => {
+                const role = expDiv.querySelector('h3').textContent.trim();
+                const company = expDiv.querySelector('p:nth-of-type(1)').textContent.trim();
+                const duration = expDiv.querySelector('p:nth-of-type(2)').textContent.trim();
+                const details = Array.from(expDiv.querySelectorAll('li')).map(li => li.textContent.trim()).join('; ');
+                portfolioContent.experience.push(`${role} at ${company} (${duration}): ${details}`);
+            });
+
+            // Projects
+            portfolioContent.projects = [];
+            document.querySelectorAll('#projects .project-item').forEach(projectDiv => {
+                const title = projectDiv.querySelector('h3').textContent.trim();
+                const techStackElement = projectDiv.querySelector('p.text-sm');
+                const techStack = techStackElement ? techStackElement.textContent.replace('**Tech Stack:** ', '').trim() : 'N/A';
+                const description = Array.from(projectDiv.querySelectorAll('.project-description li')).map(li => li.textContent.trim()).join('; ');
+                portfolioContent.projects.push({ title, techStack, description });
+            });
+
+            // Achievements
+            portfolioContent.achievements = Array.from(document.querySelectorAll('#achievements li')).map(li => li.textContent.trim());
+
+            console.log("Portfolio content extracted:", portfolioContent); // For debugging
+        }
+
+        // Call extraction on page load
+        window.onload = extractPortfolioContent;
+
+
+        // Function to add message to chat display
+        function addChatMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('chat-bubble');
+            bubbleDiv.textContent = message;
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        }
+
+        // Function to handle chat messages (basic keyword matching)
+        function handleChatMessage(userMessage) {
+            const lowerCaseMessage = userMessage.toLowerCase();
+            let botResponse = "I'm sorry, I can only answer basic questions about Vedendra's profile, skills, education, experience, and projects based on the information on this page. Could you rephrase your question?";
+
+            if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
+                botResponse = "Hello! How can I help you learn about Vedendra's portfolio?";
+            } else if (lowerCaseMessage.includes("about me") || lowerCaseMessage.includes("profile") || lowerCaseMessage.includes("who is vedendra")) {
+                botResponse = `Here's a summary of Vedendra's profile: ${portfolioContent.profile}`;
+            } else if (lowerCaseMessage.includes("skill") || lowerCaseMessage.includes("expertise")) {
+                let skillsResponse = "Vedendra's technical skills include:\n";
+                for (const category in portfolioContent.skills) {
+                    skillsResponse += `- ${category}: ${portfolioContent.skills[category]}\n`;
+                }
+                botResponse = skillsResponse;
+            } else if (lowerCaseMessage.includes("education") || lowerCaseMessage.includes("study")) {
+                botResponse = "Vedendra's education details:\n" + portfolioContent.education.join('\n');
+            } else if (lowerCaseMessage.includes("experience") || lowerCaseMessage.includes("internship") || lowerCaseMessage.includes("training")) {
+                botResponse = "Here's information on Vedendra's training and internships:\n" + portfolioContent.experience.join('\n');
+            } else if (lowerCaseMessage.includes("project") || lowerCaseMessage.includes("what have you built")) {
+                if (portfolioContent.projects.length > 0) {
+                    let projectsResponse = "Vedendra has worked on the following projects:\n";
+                    portfolioContent.projects.forEach(project => {
+                        projectsResponse += `- ${project.title} (Tech Stack: ${project.techStack})\n   Description: ${project.description}\n`;
+                    });
+                    botResponse = projectsResponse;
+                } else {
+                    botResponse = "There are no projects listed at the moment.";
+                }
+            } else if (lowerCaseMessage.includes("achievement") || lowerCaseMessage.includes("award")) {
+                botResponse = "Vedendra's notable achievements include:\n" + portfolioContent.achievements.join('\n');
+            } else if (lowerCaseMessage.includes("contact")) {
+                botResponse = "You can contact Vedendra using the 'Contact Me' form on this page, or directly via email at vedendrarajpal17@gmail.com or phone at (+91) 9521809877.";
+            }
+
+            setTimeout(() => {
+                addChatMessage(botResponse, 'bot');
+            }, 500); // Simulate a small delay for response
+        }
+
+        // Chatbox Toggle Button functionality
+        const chatToggleButton = document.getElementById('chatToggleButton');
+        const chatContainer = document.getElementById('chatContainer');
+        const closeChatButton = document.getElementById('closeChatButton');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatButton = document.getElementById('sendChatButton');
+
+        chatToggleButton.addEventListener('click', () => {
+            chatContainer.classList.toggle('open');
+            if (chatContainer.classList.contains('open')) {
+                chatInput.focus();
+            }
+        });
+
+        closeChatButton.addEventListener('click', () => {
+            chatContainer.classList.remove('open');
+        });
+
+        // Send message functionality
+        sendChatButton.addEventListener('click', () => {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === '') return;
+
+            addChatMessage(userMessage, 'user');
+            chatInput.value = ''; // Clear input
+            handleChatMessage(userMessage); // Process user message
+        });
+
+        // Allow sending message with Enter key
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatButton.click();
+            }
+        });
+
+        // Contact Form static submission (no API)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default submission to '#'
+            alert('Thank you for your message! Vedendra will get back to you soon.');
+            e.target.reset(); // Clear the form fields
+        });
+    </script>
+</body>
+</html>
