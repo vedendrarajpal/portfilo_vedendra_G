@@ -152,16 +152,16 @@
 
     <!-- Header & Navigation -->
     <header class="bg-white shadow-md py-4 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
-            <a href="#" class="text-2xl font-bold text-blue-600">Vedendra Raj Pal</a>
-            <nav>
-                <ul class="flex space-x-4 sm:space-x-6">
-                    <li><a href="#profile" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Profile</a></li>
-                    <li><a href="#skills" class="text-700 hover:text-blue-600 font-medium transition duration-300">Skills</a></li>
-                    <li><a href="#education" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Education</a></li>
-                    <li><a href="#experience" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Experience</a></li>
-                    <li><a href="#projects" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Projects</a></li>
-                    <li><a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</a></li>
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="#" class="text-2xl font-bold text-blue-600 mb-2 sm:mb-0">Vedendra Raj Pal</a>
+            <nav class="w-full sm:w-auto">
+                <ul class="flex flex-wrap justify-center sm:justify-end gap-x-4 gap-y-2 text-center">
+                    <li><a href="#profile" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Profile</a></li>
+                    <li><a href="#skills" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Skills</a></li>
+                    <li><a href="#education" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Education</a></li>
+                    <li><a href="#experience" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Experience</a></li>
+                    <li><a href="#projects" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Projects</a></li>
+                    <li><a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 px-2 py-1 rounded-md">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -171,10 +171,10 @@
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- Profile Section -->
-        <section id="profile" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Profile</h2>
-            <p class="text-lg leading-relaxed">Motivated and hands-on student pursuing a Bachelor of Technology in Computer Science and Engineering with practical experience in DevOps methodologies and Cloud Computing. Proficient in Linux administration, fundamental AWS services (S3, EC2, IAM), Docker, and building automated CI/CD pipelines using Jenkins. Seeking opportunities to apply and expand these skills in a professional environment.</p>
-            <div class="mt-6 flex flex-wrap gap-4 text-gray-600">
+        <section id="profile" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Profile</h2>
+            <p class="text-base sm:text-lg leading-relaxed">Motivated and hands-on student pursuing a Bachelor of Technology in Computer Science and Engineering with practical experience in DevOps methodologies and Cloud Computing. Proficient in Linux administration, fundamental AWS services (S3, EC2, IAM), Docker, and building automated CI/CD pipelines using Jenkins. Seeking opportunities to apply and expand these skills in a professional environment.</p>
+            <div class="mt-6 flex flex-wrap justify-center sm:justify-start gap-4 text-gray-600 text-sm sm:text-base">
                 <span class="flex items-center"><i class="fas fa-phone mr-2 text-blue-500"></i> (+91) 9521809877</span>
                 <span class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-500"></i> vedendrarajpal17@gmail.com</span>
                 <a href="https://www.linkedin.com/in/vedendra-raj-pal-306929258/" target="_blank" class="flex items-center hover:text-blue-600 transition duration-300"><i class="fab fa-linkedin mr-2 text-blue-500"></i> LinkedIn</a>
@@ -184,12 +184,12 @@
         </section>
 
         <!-- Technical Skills Section -->
-        <section id="skills" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Technical Skills</h2>
+        <section id="skills" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">DevOps & Cloud</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">DevOps & Cloud</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>AWS (S3, EC2, IAM)</li>
                         <li>Linux (User Permissions, Storage Management, LVM, SELinux)</li>
                         <li>Docker</li>
@@ -197,14 +197,14 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">CI/CD Tools</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">CI/CD Tools</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>Jenkins (basic)</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Scripting & Programming</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Scripting & Programming</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>Python</li>
                         <li>C++</li>
                         <li>HTML</li>
@@ -212,22 +212,22 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Web Frameworks</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Web Frameworks</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>Flask</li>
                         <li>Django (basic)</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Databases</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Databases</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>MySQL</li>
                         <li>SQLite</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Servers & Networking</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Servers & Networking</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>Database Server</li>
                         <li>NFS Server</li>
                         <li>Web Server (HTTPD)</li>
@@ -235,8 +235,8 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Web Development Concepts</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Web Development Concepts</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 text-sm sm:text-base">
                         <li>Web Hosting</li>
                         <li>Responsive Design</li>
                     </ul>
@@ -245,38 +245,38 @@
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Education</h2>
+        <section id="education" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Education</h2>
             <div class="mb-4">
-                <h3 class="text-xl font-semibold text-gray-700">Bachelor of Technology in Computer Science and Engineering</h3>
-                <p class="text-gray-600">Arya College of Engineering (ACE), Jaipur, Rajasthan</p>
-                <p class="text-sm text-gray-500">Expected Graduation: 2026</p>
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Bachelor of Technology in Computer Science and Engineering</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Arya College of Engineering (ACE), Jaipur, Rajasthan</p>
+                <p class="text-xs sm:text-sm text-gray-500">Expected Graduation: 2026</p>
             </div>
             <div>
-                <h3 class="text-xl font-semibold text-gray-700">Class – 12th (CBSE)</h3>
-                <p class="text-gray-600">Air Force School, Jaipur, Rajasthan</p>
-                <p class="text-sm text-gray-500">Completed: 2022</p>
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Class – 12th (CBSE)</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Air Force School, Jaipur, Rajasthan</p>
+                <p class="text-xs sm:text-sm text-gray-500">Completed: 2022</p>
             </div>
         </section>
 
         <!-- Training and Internship Section -->
-        <section id="experience" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Training and Internship</h2>
+        <section id="experience" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Training and Internship</h2>
             <div class="mb-6">
-                <h3 class="text-xl font-semibold text-gray-700">DevOps and Cloud Computing Trainee</h3>
-                <p class="text-gray-600">GRRAS SOLUTION PVT. LMT.</p>
-                <p class="text-sm text-gray-500">October 2024 – June 2025</p>
-                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-700">DevOps and Cloud Computing Trainee</h3>
+                <p class="text-gray-600 text-sm sm:text-base">GRRAS SOLUTION PVT. LMT.</p>
+                <p class="text-xs sm:text-sm text-gray-500">October 2024 – June 2025</p>
+                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1 text-sm sm:text-base">
                     <li>Gained practical experience in configuring various servers including Database, NFS, and Webserver (HTTPD).</li>
                     <li>Successfully launched a Static Website using AWS S3 Bucket.</li>
                     <li>Developed foundational understanding of Linux administration and AWS services through hands-on exercises.</li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-xl font-semibold text-gray-700">Python Programming Trainee</h3>
-                <p class="text-gray-600">GRRAS SOLUTION PVT. LMT.</p>
-                <p class="text-sm text-gray-500">March 2024 – August 2024</p>
-                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Python Programming Trainee</h3>
+                <p class="text-gray-600 text-sm sm:text-base">GRRAS SOLUTION PVT. LMT.</p>
+                <p class="text-xs sm:text-sm text-gray-500">March 2024 – August 2024</p>
+                <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1 text-sm sm:text-base">
                     <li>Completed training in Python and Web Development using Flask.</li>
                     <li>Developed a Bank Management Program and a dynamic Portfolio Website with MySQL integration.</li>
                     <li>Gained hands-on experience in Networking concepts.</li>
@@ -285,41 +285,41 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Projects</h2>
+        <section id="projects" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Projects</h2>
             <div class="space-y-6">
                 <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
-                    <h3 class="text-xl font-semibold text-gray-700">CI/CD Pipeline using Jenkins, Git, and AWS EC2</h3>
-                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** Jenkins, GitHub, Webhook, AWS EC2, Linux, Apache</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700">CI/CD Pipeline using Jenkins, Git, and AWS EC2</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-2">**Tech Stack:** Jenkins, GitHub, Webhook, AWS EC2, Linux, Apache</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description text-sm sm:text-base">
                         <li>Automated code deployment from GitHub to AWS web server using Jenkins CI/CD pipeline.</li>
                         <li>Configured Jenkins on one EC2 instance and deployed to another, ensuring continuous delivery via GitHub Webhooks and SSH.</li>
                     </ul>
                 </div>
                 <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
-                    <h3 class="text-xl font-semibold text-gray-700">Personal Cloud Storage System</h3>
-                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** Python, Flask, AWS S3, EC2, IAM, Linux</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Personal Cloud Storage System</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-2">**Tech Stack:** Python, Flask, AWS S3, EC2, IAM, Linux</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description text-sm sm:text-base">
                         <li>Developed a secure, Dropbox-like system for storing and accessing files on the cloud.</li>
                     </ul>
                 </div>
                 <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
-                    <h3 class="text-xl font-semibold text-gray-700">Two-Tier Application Deployment Using Docker</h3>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Two-Tier Application Deployment Using Docker</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description text-sm sm:text-base">
                         <li>Successfully deployed a two-tier application, demonstrating practical application of Docker for containerization.</li>
                     </ul>
                 </div>
                 <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
-                    <h3 class="text-xl font-semibold text-gray-700">Portfolio Website</h3>
-                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Flask</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Portfolio Website</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Flask</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description text-sm sm:text-base">
                         <li>Developed and hosted a personal portfolio website showcasing technical skills and projects.</li>
                     </ul>
                 </div>
                 <div class="project-item p-4 border border-gray-200 rounded-md bg-gray-50">
-                    <h3 class="text-xl font-semibold text-gray-700">Icecream Website</h3>
-                    <p class="text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Django, Django models (Database)</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description">
+                    <h3 class="text-lg sm:text-xl font-semibold text-gray-700">Icecream Website</h3>
+                    <p class="text-xs sm:text-sm text-gray-500 mb-2">**Tech Stack:** HTML, CSS, Bootstrap, Django, Django models (Database)</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 project-description text-sm sm:text-base">
                         <li>Created a dynamic website with database integration.</li>
                     </ul>
                 </div>
@@ -327,9 +327,9 @@
         </section>
 
         <!-- Achievements Section -->
-        <section id="achievements" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Achievements</h2>
-            <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <section id="achievements" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Achievements</h2>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm sm:text-base">
                 <li>National Cadet Corps (NCC) A Certificate – Grade A</li>
                 <li>1st Prize – Robo War - Engineering Day, Arya College of Engineering</li>
                 <li>Bronze Badge – Python (HackerRank): Recognized for problem-solving skills and proficiency in Python programming.</li>
@@ -338,23 +338,23 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="bg-white p-8 rounded-lg shadow-lg mb-8">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Contact Me</h2>
-            <p class="text-gray-600 mb-6">Have a question or want to connect? Send me a message!</p>
+        <section id="contact" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 border-b-2 border-blue-300 pb-2">Contact Me</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Have a question or want to connect? Send me a message!</p>
             <form id="contactForm" class="space-y-4" action="#" method="POST">
                 <div>
                     <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-                    <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+                    <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 text-sm sm:text-base">
                 </div>
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                    <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500">
+                    <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 text-sm sm:text-base">
                 </div>
                 <div>
                     <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
-                    <textarea id="message" name="message" rows="5" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"></textarea>
+                    <textarea id="message" name="message" rows="5" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 text-sm sm:text-base"></textarea>
                 </div>
-                <button type="submit" id="submitButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105">
+                <button type="submit" id="submitButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105 text-sm sm:text-base">
                     Send Message
                 </button>
             </form>
@@ -365,7 +365,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6 mt-8">
         <div class="container mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <p>&copy; 2024 Vedendra Raj Pal. All rights reserved.</p>
+            <p class="text-sm sm:text-base">&copy; 2024 Vedendra Raj Pal. All rights reserved.</p>
             <div class="flex justify-center space-x-4 mt-2">
                 <a href="https://www.linkedin.com/in/vedendra-raj-pal-306929258/" target="_blank" class="text-white hover:text-blue-400 transition duration-300"><i class="fab fa-linkedin text-xl"></i></a>
                 <a href="https://github.com/vedendrarajpal" target="_blank" class="text-white hover:text-blue-400 transition duration-300"><i class="fab fa-github text-xl"></i></a>
@@ -466,7 +466,6 @@
             bubbleDiv.classList.add('chat-bubble');
             bubbleDiv.textContent = message;
             messageDiv.appendChild(bubbleDiv);
-            chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
         }
 
