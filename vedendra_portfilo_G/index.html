@@ -407,50 +407,117 @@
 
         // Function to extract relevant text content from the page
         function extractPortfolioContent() {
-            // Profile
-            portfolioContent.profile = document.getElementById('profile').querySelector('p').textContent.trim();
+            console.log("Attempting to extract portfolio content...");
+            try {
+                // Profile
+                const profileElement = document.getElementById('profile');
+                if (profileElement) {
+                    portfolioContent.profile = profileElement.querySelector('p').textContent.trim();
+                    console.log("Profile extracted:", portfolioContent.profile);
+                } else {
+                    console.warn("Profile section not found.");
+                }
 
-            // Skills
-            portfolioContent.skills = {};
-            document.querySelectorAll('#skills > div').forEach(categoryDiv => {
-                const categoryTitle = categoryDiv.querySelector('h3').textContent.trim();
-                const items = Array.from(categoryDiv.querySelectorAll('li')).map(li => li.textContent.trim());
-                portfolioContent.skills[categoryTitle] = items.join(', ');
-            });
 
-            // Education
-            portfolioContent.education = [];
-            document.querySelectorAll('#education > div').forEach(eduDiv => {
-                const degree = eduDiv.querySelector('h3').textContent.trim();
-                const institution = eduDiv.querySelector('p:nth-of-type(1)').textContent.trim();
-                const year = eduDiv.querySelector('p:nth-of-type(2)').textContent.trim();
-                portfolioContent.education.push(`${degree} from ${institution} (${year})`);
-            });
+                // Skills
+                portfolioContent.skills = {};
+                const skillsSection = document.getElementById('skills');
+                if (skillsSection) {
+                    skillsSection.querySelectorAll('div').forEach(categoryDiv => {
+                        const categoryTitleElement = categoryDiv.querySelector('h3');
+                        if (categoryTitleElement) {
+                            const categoryTitle = categoryTitleElement.textContent.trim();
+                            const items = Array.from(categoryDiv.querySelectorAll('li')).map(li => li.textContent.trim());
+                            portfolioContent.skills[categoryTitle] = items.join(', ');
+                        }
+                    });
+                    console.log("Skills extracted:", portfolioContent.skills);
+                } else {
+                    console.warn("Skills section not found.");
+                }
 
-            // Experience (Training and Internship)
-            portfolioContent.experience = [];
-            document.querySelectorAll('#experience > div').forEach(expDiv => {
-                const role = expDiv.querySelector('h3').textContent.trim();
-                const company = expDiv.querySelector('p:nth-of-type(1)').textContent.trim();
-                const duration = expDiv.querySelector('p:nth-of-type(2)').textContent.trim();
-                const details = Array.from(expDiv.querySelectorAll('li')).map(li => li.textContent.trim()).join('; ');
-                portfolioContent.experience.push(`${role} at ${company} (${duration}): ${details}`);
-            });
 
-            // Projects
-            portfolioContent.projects = [];
-            document.querySelectorAll('#projects .project-item').forEach(projectDiv => {
-                const title = projectDiv.querySelector('h3').textContent.trim();
-                const techStackElement = projectDiv.querySelector('p.text-sm');
-                const techStack = techStackElement ? techStackElement.textContent.replace('**Tech Stack:** ', '').trim() : 'N/A';
-                const description = Array.from(projectDiv.querySelectorAll('.project-description li')).map(li => li.textContent.trim()).join('; ');
-                portfolioContent.projects.push({ title, techStack, description });
-            });
+                // Education
+                portfolioContent.education = [];
+                const educationSection = document.getElementById('education');
+                if (educationSection) {
+                    educationSection.querySelectorAll('div').forEach(eduDiv => {
+                        const degreeElement = eduDiv.querySelector('h3');
+                        const institutionElement = eduDiv.querySelector('p:nth-of-type(1)');
+                        const yearElement = eduDiv.querySelector('p:nth-of-type(2)');
 
-            // Achievements
-            portfolioContent.achievements = Array.from(document.querySelectorAll('#achievements li')).map(li => li.textContent.trim());
+                        if (degreeElement && institutionElement && yearElement) {
+                            const degree = degreeElement.textContent.trim();
+                            const institution = institutionElement.textContent.trim();
+                            const year = yearElement.textContent.trim();
+                            portfolioContent.education.push(`${degree} from ${institution} (${year})`);
+                        }
+                    });
+                    console.log("Education extracted:", portfolioContent.education);
+                } else {
+                    console.warn("Education section not found.");
+                }
 
-            console.log("Portfolio content extracted:", portfolioContent); // For debugging
+
+                // Experience (Training and Internship)
+                portfolioContent.experience = [];
+                const experienceSection = document.getElementById('experience');
+                if (experienceSection) {
+                    experienceSection.querySelectorAll('div').forEach(expDiv => {
+                        const roleElement = expDiv.querySelector('h3');
+                        const companyElement = expDiv.querySelector('p:nth-of-type(1)');
+                        const durationElement = expDiv.querySelector('p:nth-of-type(2)');
+
+                        if (roleElement && companyElement && durationElement) {
+                            const role = roleElement.textContent.trim();
+                            const company = companyElement.textContent.trim();
+                            const duration = durationElement.textContent.trim();
+                            const details = Array.from(expDiv.querySelectorAll('li')).map(li => li.textContent.trim()).join('; ');
+                            portfolioContent.experience.push(`${role} at ${company} (${duration}): ${details}`);
+                        }
+                    });
+                    console.log("Experience extracted:", portfolioContent.experience);
+                } else {
+                    console.warn("Experience section not found.");
+                }
+
+
+                // Projects
+                portfolioContent.projects = [];
+                const projectsSection = document.getElementById('projects');
+                if (projectsSection) {
+                    projectsSection.querySelectorAll('.project-item').forEach(projectDiv => {
+                        const titleElement = projectDiv.querySelector('h3');
+                        const techStackElement = projectDiv.querySelector('p.text-sm');
+                        const descriptionElement = projectDiv.querySelector('.project-description');
+
+                        if (titleElement && descriptionElement) { // Tech stack is optional
+                            const title = titleElement.textContent.trim();
+                            const techStack = techStackElement ? techStackElement.textContent.replace('**Tech Stack:** ', '').trim() : 'N/A';
+                            const description = Array.from(descriptionElement.querySelectorAll('li')).map(li => li.textContent.trim()).join('; ');
+                            portfolioContent.projects.push({ title, techStack, description });
+                        }
+                    });
+                    console.log("Projects extracted:", portfolioContent.projects);
+                } else {
+                    console.warn("Projects section not found.");
+                }
+
+
+                // Achievements
+                const achievementsSection = document.getElementById('achievements');
+                if (achievementsSection) {
+                    portfolioContent.achievements = Array.from(achievementsSection.querySelectorAll('li')).map(li => li.textContent.trim());
+                    console.log("Achievements extracted:", portfolioContent.achievements);
+                } else {
+                    console.warn("Achievements section not found.");
+                }
+
+                console.log("Final portfolioContent object:", portfolioContent);
+
+            } catch (error) {
+                console.error("Error during portfolio content extraction:", error);
+            }
         }
 
         // Call extraction on page load
@@ -466,28 +533,35 @@
             bubbleDiv.classList.add('chat-bubble');
             bubbleDiv.textContent = message;
             messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+            console.log(`Chat message added: [${sender}] ${message}`); // Debugging
         }
 
         // Function to handle chat messages (basic keyword matching)
         function handleChatMessage(userMessage) {
+            console.log(`User message received: ${userMessage}`); // Debugging
             const lowerCaseMessage = userMessage.toLowerCase();
             let botResponse = "I'm sorry, I can only answer basic questions about Vedendra's profile, skills, education, experience, and projects based on the information on this page. Could you rephrase your question?";
 
             if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
                 botResponse = "Hello! How can I help you learn about Vedendra's portfolio?";
             } else if (lowerCaseMessage.includes("about me") || lowerCaseMessage.includes("profile") || lowerCaseMessage.includes("who is vedendra")) {
-                botResponse = `Here's a summary of Vedendra's profile: ${portfolioContent.profile}`;
+                botResponse = `Here's a summary of Vedendra's profile: ${portfolioContent.profile || "Information not available."}`;
             } else if (lowerCaseMessage.includes("skill") || lowerCaseMessage.includes("expertise")) {
-                let skillsResponse = "Vedendra's technical skills include:\n";
-                for (const category in portfolioContent.skills) {
-                    skillsResponse += `- ${category}: ${portfolioContent.skills[category]}\n`;
+                if (Object.keys(portfolioContent.skills).length > 0) {
+                    let skillsResponse = "Vedendra's technical skills include:\n";
+                    for (const category in portfolioContent.skills) {
+                        skillsResponse += `- ${category}: ${portfolioContent.skills[category]}\n`;
+                    }
+                    botResponse = skillsResponse;
+                } else {
+                    botResponse = "Skills information not available.";
                 }
-                botResponse = skillsResponse;
             } else if (lowerCaseMessage.includes("education") || lowerCaseMessage.includes("study")) {
-                botResponse = "Vedendra's education details:\n" + portfolioContent.education.join('\n');
+                botResponse = portfolioContent.education.length > 0 ? "Vedendra's education details:\n" + portfolioContent.education.join('\n') : "Education information not available.";
             } else if (lowerCaseMessage.includes("experience") || lowerCaseMessage.includes("internship") || lowerCaseMessage.includes("training")) {
-                botResponse = "Here's information on Vedendra's training and internships:\n" + portfolioContent.experience.join('\n');
+                botResponse = portfolioContent.experience.length > 0 ? "Here's information on Vedendra's training and internships:\n" + portfolioContent.experience.join('\n') : "Experience information not available.";
             } else if (lowerCaseMessage.includes("project") || lowerCaseMessage.includes("what have you built")) {
                 if (portfolioContent.projects.length > 0) {
                     let projectsResponse = "Vedendra has worked on the following projects:\n";
@@ -499,11 +573,12 @@
                     botResponse = "There are no projects listed at the moment.";
                 }
             } else if (lowerCaseMessage.includes("achievement") || lowerCaseMessage.includes("award")) {
-                botResponse = "Vedendra's notable achievements include:\n" + portfolioContent.achievements.join('\n');
+                botResponse = portfolioContent.achievements.length > 0 ? "Vedendra's notable achievements include:\n" + portfolioContent.achievements.join('\n') : "Achievements information not available.";
             } else if (lowerCaseMessage.includes("contact")) {
                 botResponse = "You can contact Vedendra using the 'Contact Me' form on this page, or directly via email at vedendrarajpal17@gmail.com or phone at (+91) 9521809877.";
             }
 
+            console.log(`Bot response: ${botResponse}`); // Debugging
             setTimeout(() => {
                 addChatMessage(botResponse, 'bot');
             }, 500); // Simulate a small delay for response
@@ -516,40 +591,68 @@
         const chatInput = document.getElementById('chatInput');
         const sendChatButton = document.getElementById('sendChatButton');
 
-        chatToggleButton.addEventListener('click', () => {
-            chatContainer.classList.toggle('open');
-            if (chatContainer.classList.contains('open')) {
-                chatInput.focus();
-            }
-        });
+        if (chatToggleButton) {
+            chatToggleButton.addEventListener('click', () => {
+                console.log("Chat toggle button clicked."); // Debugging
+                chatContainer.classList.toggle('open');
+                if (chatContainer.classList.contains('open')) {
+                    chatInput.focus();
+                }
+            });
+        } else {
+            console.error("Chat toggle button not found!");
+        }
 
-        closeChatButton.addEventListener('click', () => {
-            chatContainer.classList.remove('open');
-        });
+        if (closeChatButton) {
+            closeChatButton.addEventListener('click', () => {
+                console.log("Close chat button clicked."); // Debugging
+                chatContainer.classList.remove('open');
+            });
+        } else {
+            console.error("Close chat button not found!");
+        }
+
 
         // Send message functionality
-        sendChatButton.addEventListener('click', () => {
-            const userMessage = chatInput.value.trim();
-            if (userMessage === '') return;
+        if (sendChatButton) {
+            sendChatButton.addEventListener('click', () => {
+                console.log("Send chat button clicked."); // Debugging
+                const userMessage = chatInput.value.trim();
+                if (userMessage === '') return;
 
-            addChatMessage(userMessage, 'user');
-            chatInput.value = ''; // Clear input
-            handleChatMessage(userMessage); // Process user message
-        });
+                addChatMessage(userMessage, 'user');
+                chatInput.value = ''; // Clear input
+                handleChatMessage(userMessage); // Process user message
+            });
+        } else {
+            console.error("Send chat button not found!");
+        }
+
 
         // Allow sending message with Enter key
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendChatButton.click();
-            }
-        });
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    console.log("Enter key pressed in chat input."); // Debugging
+                    sendChatButton.click();
+                }
+            });
+        } else {
+            console.error("Chat input not found!");
+        }
+
 
         // Contact Form static submission (no API)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default submission to '#'
-            alert('Thank you for your message! Vedendra will get back to you soon.');
-            e.target.reset(); // Clear the form fields
-        });
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent default submission to '#'
+                alert('Thank you for your message! Vedendra will get back to you soon.');
+                e.target.reset(); // Clear the form fields
+            });
+        } else {
+            console.error("Contact form not found!");
+        }
     </script>
 </body>
 </html>
