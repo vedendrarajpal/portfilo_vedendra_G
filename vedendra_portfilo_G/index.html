@@ -139,12 +139,16 @@
             font-size: 1.8rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease; /* Added opacity transition */
             z-index: 1001; /* Above chatbox */
         }
         .chat-toggle-button:hover {
             background-color: #1d4ed8; /* Blue-700 */
             transform: scale(1.05);
+        }
+        .chat-toggle-button.hidden-button { /* New class to hide the button */
+            opacity: 0;
+            pointer-events: none; /* Disable clicks when hidden */
         }
     </style>
 </head>
@@ -598,8 +602,13 @@
             chatToggleButton.addEventListener('click', () => {
                 console.log("Chat toggle button clicked."); // Debugging
                 chatContainer.classList.toggle('open');
+                // Hide the toggle button when chatbox is open
                 if (chatContainer.classList.contains('open')) {
+                    chatToggleButton.classList.add('hidden-button');
                     chatInput.focus();
+                } else {
+                    // Show the toggle button when chatbox is closed
+                    chatToggleButton.classList.remove('hidden-button');
                 }
             });
         } else {
@@ -610,6 +619,8 @@
             closeChatButton.addEventListener('click', () => {
                 console.log("Close chat button clicked."); // Debugging
                 chatContainer.classList.remove('open');
+                // Show the toggle button when chatbox is closed
+                chatToggleButton.classList.remove('hidden-button');
             });
         } else {
             console.error("Close chat button not found!");
